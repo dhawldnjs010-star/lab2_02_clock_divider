@@ -79,7 +79,7 @@ sim/tb_clock_divider.sv:19: $finish called at 436000 (1ps)
 
 - 본인 실행 로그: [`../../evidence/pre/lab2_02_normal.log`](../../evidence/pre/lab2_02_normal.log)
 - VCD: [`../../evidence/pre/lab2_02_wave_normal.vcd`](../../evidence/pre/lab2_02_wave_normal.vcd)
-- 파형 캡처(VaporView): `evidence/pre/lab2_02_wave_full.png`(전체 Zoom Fit), `evidence/pre/lab2_02_wave_zoom.png`(상승 에지 확대)
+- 파형 캡처(VaporView): `evidence/pre/lab2_02_wave_zoom.png`(상승 에지 확대)
 - 오류: 첫 실행에서 발생한 오류가 있으면 첫 오류 → 수정 → 재실행 로그 순서로 기록한다. (없으면 "없음", Python 실행 경로를 고쳤다면 그 내용 기입)
 
 ### 사전 파형 해석
@@ -114,9 +114,9 @@ sim/tb_clock_divider.sv:19: $finish called at 436000 (1ps)
 
 | 단계 | 소스 커밋 또는 해시 | 실행 폴더·로그 링크 | 입력·기대값·실제값 | 해석 |
 |---|---|---|---|---|
-| 정상 코드 | `<커밋/해시 기입>` | [normal.log](../../evidence/pre/lab2_02_normal.log) | 16 ns 기대 div2=1, 실제 div2=1. `LAB2_PASS clock_divider checks=129` | 모든 검사 통과, 436 ns 종료. |
-| 지정한 RTL 변경 | `<커밋/해시 기입>` | [mod.log](../../evidence/pre/lab2_02_mod.log) | 16 ns 기대 div2=1, 실제 div2=0. `LAB2_FAIL minimum divisor duty time=16000`, `FATAL: sim/tb_clock_divider.sv:12: check failed` | `minimum divisor duty` 검사가 변경을 발견했다(로그의 time은 ps 단위, 16000 ps = 16 ns). |
-| 원래 코드로 복구 | `<커밋/해시 기입>` | [recover.log](../../evidence/pre/lab2_02_recover.log) | 복구 후 전체 검사 재실행. `LAB2_PASS clock_divider checks=129`, `$finish called at 436000 (1ps)` | PASS와 종료 시각이 정상 실행과 같고 새 VCD를 확인한다. |
+| 정상 코드 | `9ef3f1c` | [normal.log](../../evidence/pre/lab2_02_normal.log) | 16 ns 기대 div2=1, 실제 div2=1. `LAB2_PASS clock_divider checks=129` | 모든 검사 통과, 436 ns 종료. |
+| 지정한 RTL 변경 | 미커밋 수정본(`9ef3f1c` 기준, 로컬 실행) | [mod.log](../../evidence/pre/lab2_02_mod.log) | 16 ns 기대 div2=1, 실제 div2=0. `LAB2_FAIL minimum divisor duty time=16000`, `FATAL: sim/tb_clock_divider.sv:12: check failed` | `minimum divisor duty` 검사가 변경을 발견했다(로그의 time은 ps 단위, 16000 ps = 16 ns). |
+| 원래 코드로 복구 | `9ef3f1c` | [recover.log](../../evidence/pre/lab2_02_recover.log) | 복구 후 전체 검사 재실행. `LAB2_PASS clock_divider checks=129`, `$finish called at 436000 (1ps)` | PASS와 종료 시각이 정상 실행과 같고 새 VCD를 확인한다. |
 
 - 첫 실패 이후에는 `$fatal`로 시뮬레이션이 끝나므로 뒤의 검사는 실행되지 않는다. 변경 전후 파형은 각각 별도 폴더에 보관한다.
 - 문법 오류를 경험했다면 오류 위치로 이동한 화면, 원인, 수정 내용과 재실행 로그도 이 절에 연결한다.
